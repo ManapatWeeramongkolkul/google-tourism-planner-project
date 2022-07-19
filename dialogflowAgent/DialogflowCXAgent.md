@@ -1,1 +1,1 @@
-Dialogflow CX agent for Google Tourism Planner Project
+Dialogflow CX agent for the Google Tourism Planner Project
