@@ -1,0 +1,30 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/tourplanneragency/tourplanner', '.']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/tourplanneragency/tourplanner']
+
+  # Deploy container image to GKE
+  # - name: 'gcr.io/cloud-builders/gke-deploy'
+  #   args:
+  #   - run
+  #   - --filename=
+  #   - --image=gcr.io/tourplanneragency/tourplanner:v1
+  #   - --location=us-central1
+  #   - --cluster=tour-plan
+
+
+  # # Entrypoint, timeout and environment variables
+  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #   entrypoint: 'gcloud'
+  #   timeout: 240s
+  #   args: ['compute', 'instances', 
+  #          'create-with-container', 'my-vm-name',
+  #          '--container-image', 
+  #          'us-central1-docker.pkg.dev/tourplanneragency/my-docker-repo/myimage']
+  #   env:
+  #     - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
