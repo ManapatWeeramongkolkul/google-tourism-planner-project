@@ -1,8 +1,3 @@
-# google-tourism-planner
+# Backend Code
 
-Backend of the prototype booking platform application
-
-go build && ./src to initialize the application server
-go run main.go
-
-ngrok htttp 8000 to get server
+Git Clone this branch to directly access the Google Tour Planner Project's backend server code directly
