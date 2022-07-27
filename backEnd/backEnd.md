@@ -1,1 +1,1 @@
-BackEnd server code written in Go
+Backend server code written in Go
