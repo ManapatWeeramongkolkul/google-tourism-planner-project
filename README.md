@@ -45,13 +45,13 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
    - Return recommended items to the Dialogflow CX agent
      - Items returned may be filtered by their category (Hotels, Flights, Tour, Locations)  
 7. startUp
-   - Delete items in Event_Recorder and Transaction_Records table
+   - Delete items in the Event_Recorder and Transaction_Records table
    - Used for testing purposes when the system had no user authentication support
 8. tripFlow
    - Supports Create Trip Flow and Create Trip Event Flow in the Dialogflow CX agent
    - Contains similar functions from the bookHotelFunction and bookFlightFunction
-   - Separate functions for each trip events categories: Shop, Travel, Eat, and Hotel
-     - Make API calls to Google Maps APIs such as Places API and Distance Matrix API
+   - Separate functions for each trip event categories: Shop, Travel, Eat, and Hotel
+     - Make API calls to Google Maps APIs such as the Places API and the Distance Matrix API
      - Set parameters for the selected option
      - Save trip events and transaction details into the database
    - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
