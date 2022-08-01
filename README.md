@@ -88,24 +88,27 @@ Create a new agent within the same Google Cloud project and Location.
      - For Hotel trip events, query the room's cost from the database 
    - When the user indicates the final event, generate a PDF file for the user to review their trip events
 7. Payment Flow 
-   - Final flow from Book Hotel Flow, Book Flight Flow, and Create Trip Event Flow
+   - Final flow from the Book Hotel Flow, Book Flight Flow, and Create Trip Event Flow
    - Show the total amount due and a QR code image
+   - Allows the user to re-enter the Default Start Flow while remaining in the session
 
-For further reference, access the dialogflowAgent folder
+For further reference, access the dialogflowAgent folder.
 
 ## Front End
 
-Git Clone the source code from the frontEnd branch
+Git Clone the source code from the frontEnd branch.
 
-`yarn add` to install the relevant dependencies
+`yarn add` to install the relevant dependencies.
 
-`expo start` to initialise the simulator
+`expo start` to initialise the simulator.
 
 The frontend source code includes the application's deployment process.
 
 ## Back End
 
-Git Clone the source code from the backEnd branch
+Git Clone the source code from the backEnd branch.
+
+`go build` to initialise the application server.
 
 To create a temporary HTTPs url, use ngrok.
 
@@ -115,7 +118,7 @@ The backend source code includes the Docker containerization process.
 
 Use Cloud SQL as the primary database of the system. Ingest data into BigQuery.
 
-BigQuery Table Schema
+***BigQuery Table Schema***
 
 **Airport**
 | Tables   |      Type      |  Mode |
@@ -180,7 +183,7 @@ BigQuery Table Schema
 **Hotels**
 | Tables   |      Type      |  Mode |
 |----------|:-------------:|------:|
-|hotel_id|STRING|NULLABLE|		
+|hotel_id|STRING|NULLABLE|	.	
 |hotel_name|STRING|NULLABLE|		
 |hotel_city|STRING|NULLABLE|		
 |price|STRING|NULLABLE|		
@@ -193,7 +196,8 @@ BigQuery Table Schema
 |visitorId|INTEGER|NULLABLE|
 |contentId|INTEGER|NULLABLE|
 
-Generated table from the Matrix Factorization model. Does need to be created manually.
+Generated table from the Matrix Factorization model.
+Does need to be created manually.
 
 **Transaction_Records**
 | Tables   |      Type      |  Mode |
