@@ -12,7 +12,7 @@ Internship project at Google (Thailand) Company Limited as a Customer Solutions 
 
 Deploy the source code onto Cloud Function in a Google Cloud project.
 
-It is highly recommended to separate each functions as appropriate for clarity when making Webhook calls.
+It is highly recommended to separate each function as appropriate for clarity when making Webhook calls.
 
 Use the generated HTTPs URL for each function to generate Webhooks in a Dialogflow CX agent.
 
@@ -22,13 +22,13 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
    - Make API calls to Google Maps APIs such as Places API and Distance Matrix API
    - Return json data to the Dialogflow CX agent 
 2. bookFlightFunction
-   - Query flight details from the database (one-way and round trip flight)
+   - Query flight details from the database (one-way and round-trip flight)
    - Set parameters for the selected flight option
    - Calculate cost from the no. of tickets booked
    - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
 3. bookHotelFunction
    - Query hotel details from the database
-   - Set paramters for the selected hotel option
+   - Set parameters for the selected hotel option
    - Calculate cost from the no. of rooms booked and length of stay 
    - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
 4. createPDF
@@ -43,7 +43,7 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
    - Return calculated cost due to the Dialogflow CX agent
 6. recommendation
    - Return recommended items to the Dialogflow CX agent
-     - Items returned may be filtered by its category (Hotels, Flights, Tour, Locations)  
+     - Items returned may be filtered by their category (Hotels, Flights, Tour, Locations)  
 7. startUp
    - Delete items in Event_Recorder and Transaction_Records table
    - Used for testing purposes when the system had no user authentication support
@@ -52,7 +52,7 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
    - Contains similar functions from the bookHotelFunction and bookFlightFunction
    - Separate functions for each trip events categories: Shop, Travel, Eat, and Hotel
      - Make API calls to Google Maps APIs such as Places API and Distance Matrix API
-     - Set paramteres for the selected option
+     - Set parameters for the selected option
      - Save trip events and transaction details into the database
    - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
 
@@ -65,17 +65,17 @@ Create a new agent within the same Google Cloud project and Location.
 7 Flows:
 1. Default State Flow 
    - The first flow which initializes the conversation with the user
-   - Include event error handling to inform the user about the Chat bot's functionality
-   - Leads user into 4 possible flows: Ask Question, Book Hotel, Book Flight, and Create Trip
+   - Include event error handling to inform the user about the chat bot's functionality
+   - Leads the user into 4 possible flows: Ask Question, Book Hotel, Book Flight, and Create Trip
 2. Ask Question Flow 
    - Created as a Route Group to ensure that the flow can be accessed at any point during the conversation
    - Should include an 'End Flow' page to return the user back to their previous conversation
-   - 3 possible types of question: FAQ list, Information Question, and Distance Queston
+   - 3 possible types of questions: FAQ list, Information Question, and Distance Queston
 3. Book Hotel Flow 
    - Allows a user to book hotel room(s)
    - Calculate user's payment amount due from no. of rooms booked and length of stay
 4. Book Flight Flow 
-   - Allows a user to book a one-way flight or a round trip flight
+   - Allows a user to book a one-way flight or a round-trip flight
    - Calculate user's payment amount due from no. of tickets booked
 5. Create Trip Flow 
    - Allows a user to plan their trip starting from a flight
@@ -84,7 +84,7 @@ Create a new agent within the same Google Cloud project and Location.
 6. Create Trip Event Flow
    - Recurring flow which allows a user to constantly create trip events
    - Categorise trips events into Shop, Travel, Eat, and Hotel
-     - Collect location, budget planned, and length of stay for each events
+     - Collect location, budget planned, and length of stay for each event
      - For Hotel trip events, query the room's cost from the database 
    - When the user indicates the final event, generate a PDF file for the user to review their trip events
 7. Payment Flow 
