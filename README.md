@@ -18,7 +18,7 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
 
 ## Dialogflow Agent
 
-At the time in which the documentation is written, it is not possible to import a downloaded Dialogflow CX agent directly.
+At the time in which this documentation is written, it is not possible to import a downloaded Dialogflow CX agent directly.
 
 Create a new agent within the same Google Cloud project and Location.
 
