@@ -37,7 +37,7 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
    - Generate a pdf file containing the user's details
      - Create a table from the list of trip events
    - Save the file to a Google Cloud Storage bucket
-   - Return fulfillment_response to the Dialogflow CX agent containing the url to the pdf file
+   - Return session_info to the Dialogflow CX agent containing the url to the pdf file
 5. payment
    - Query total amount due from a user's id
    - Return calculated cost due to the Dialogflow CX agent
