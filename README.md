@@ -16,6 +16,46 @@ It is highly recommended to separate each functions as appropriate for clarity w
 
 Use the generated HTTPs URL for each function to generate Webhooks in a Dialogflow CX agent.
 
+8 functions:
+1. askQuestion
+   - Contains a global parameter: mapskey
+   - Make API calls to Google Maps APIs such as Places API and Distance Matrix API
+   - Return json data to the Dialogflow CX agent 
+2. bookFlightFunction
+   - Query flight details from the database (one-way and round trip flight)
+   - Set parameters for the selected flight option
+   - Calculate cost from the no. of tickets booked
+   - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
+3. bookHotelFunction
+   - Query hotel details from the database
+   - Set paramters for the selected hotel option
+   - Calculate cost from the no. of rooms booked and length of stay 
+   - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
+4. createPDF
+   - Contains a fonts folder for Roboto text style
+   - Query a user's trip events from the database
+   - Generate a pdf file containing the user's details
+     - Create a table from the list of trip events
+   - Save the file to a Google Cloud Storage bucket
+   - Return fulfillment_response to the Dialogflow CX agent containing the url to the pdf file
+5. payment
+   - Query total amount due from a user's id
+   - Return calculated cost due to the Dialogflow CX agent
+6. recommendation
+   - Return recommended items to the Dialogflow CX agent
+     - Items returned may be filtered by its category (Hotels, Flights, Tour, Locations)  
+7. startUp
+   - Delete items in Event_Recorder and Transaction_Records table
+   - Used for testing purposes when the system had no user authentication support
+8. tripFlow
+   - Supports Create Trip Flow and Create Trip Event Flow in the Dialogflow CX agent
+   - Contains similar functions from the bookHotelFunction and bookFlightFunction
+   - Separate functions for each trip events categories: Shop, Travel, Eat, and Hotel
+     - Make API calls to Google Maps APIs such as Places API and Distance Matrix API
+     - Set paramteres for the selected option
+     - Save trip events and transaction details into the database
+   - Return fulfillment_response to the Dialogflow CX agent to generate a rich response
+
 ## Dialogflow Agent
 
 At the time in which this documentation is written, it is not possible to import a downloaded Dialogflow CX agent directly.
@@ -23,13 +63,33 @@ At the time in which this documentation is written, it is not possible to import
 Create a new agent within the same Google Cloud project and Location.
 
 7 Flows:
-1. Default State Flow - The first flow which initializes the conversation with the user. Include event error handling to inform the user about the Chat bot's functionality. Leads user into 4 possible flows: Ask Question, Book Hotel, Book Flight, and Create Trip.
-2. Ask Question Flow - Created as a Route Group to ensure that the flow can be accessed at any point during the conversation. Should include an 'End Flow' page to return the user back to their previous conversation. 3 possible types of question: FAQ list, Information Question, and Distance Queston.
-3. Book Hotel Flow - Allows a user to book hotel room(s).
-4. Book Flight Flow - Allows a user to book a one-way flight or a round trip flight.
-5. Create Trip Flow - Allows a user to plan their trip starting from flight. If the user selects a one-way flight, prompt the user to create book a return flight. Direct a user into the Create Trip Event flow.
-6. Create Trip Event Flow - Recurring flow which allows a user to constantly create trip events. Categorise trips events into Shop, Travel, Eat, and Hotel. When the user indicates the final event, generate a PDF file for the user to review their trip events.
-7. Payment Flow - Final flow from Book Hotel Flow, Book Flight Flow, and Create Trip Event Flow. Show the total amount due and a QR code image.
+1. Default State Flow 
+   - The first flow which initializes the conversation with the user
+   - Include event error handling to inform the user about the Chat bot's functionality
+   - Leads user into 4 possible flows: Ask Question, Book Hotel, Book Flight, and Create Trip
+2. Ask Question Flow 
+   - Created as a Route Group to ensure that the flow can be accessed at any point during the conversation
+   - Should include an 'End Flow' page to return the user back to their previous conversation
+   - 3 possible types of question: FAQ list, Information Question, and Distance Queston
+3. Book Hotel Flow 
+   - Allows a user to book hotel room(s)
+   - Calculate user's payment amount due from no. of rooms booked and length of stay
+4. Book Flight Flow 
+   - Allows a user to book a one-way flight or a round trip flight
+   - Calculate user's payment amount due from no. of tickets booked
+5. Create Trip Flow 
+   - Allows a user to plan their trip starting from a flight
+   - If the user selects a one-way flight, prompt the user to create book a return flight
+   - Direct a user into the Create Trip Event flow
+6. Create Trip Event Flow
+   - Recurring flow which allows a user to constantly create trip events
+   - Categorise trips events into Shop, Travel, Eat, and Hotel
+     - Collect location, budget planned, and length of stay for each events
+     - For Hotel trip events, query the room's cost from the database 
+   - When the user indicates the final event, generate a PDF file for the user to review their trip events
+7. Payment Flow 
+   - Final flow from Book Hotel Flow, Book Flight Flow, and Create Trip Event Flow
+   - Show the total amount due and a QR code image
 
 For further reference, access the dialogflowAgent folder
 
@@ -41,16 +101,21 @@ Git Clone the source code from the frontEnd branch
 
 `expo start` to initialise the simulator
 
+The frontend source code includes the application's deployment process.
+
 ## Back End
 
 Git Clone the source code from the backEnd branch
 
 To create a temporary HTTPs url, use ngrok.
-https://yarnpkg.com/package/ngrok
+
+The backend source code includes the Docker containerization process.
 
 ## Database
 
-BigQuery table schema
+Use Cloud SQL as the primary database of the system. Ingest data into BigQuery.
+
+BigQuery Table Schema
 
 **Airport**
 | Tables   |      Type      |  Mode |
@@ -128,7 +193,7 @@ BigQuery table schema
 |visitorId|INTEGER|NULLABLE|
 |contentId|INTEGER|NULLABLE|
 
-Generated table from the Matrix Factorization model
+Generated table from the Matrix Factorization model. Does need to be created manually.
 
 **Transaction_Records**
 | Tables   |      Type      |  Mode |
@@ -170,6 +235,8 @@ Generated table from the Matrix Factorization model
 |visitorId|INTEGER|REQUIRED|	
 |contentId|INTEGER|REQUIRED|		
 |rating|FLOAT|REQUIRED|		
+
+Training and testing data for the BigQuery ML.
 
 **User_TripOnboarding1**
 | Tables   |      Type      |  Mode |
