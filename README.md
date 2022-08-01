@@ -50,7 +50,7 @@ Use the generated HTTPs URL for each function to generate Webhooks in a Dialogfl
 8. tripFlow
    - Supports Create Trip Flow and Create Trip Event Flow in the Dialogflow CX agent
    - Contains similar functions from the bookHotelFunction and bookFlightFunction
-   - Separate functions for each trip event categories: Shop, Travel, Eat, and Hotel
+   - Separate functions for each trip event category: Shop, Travel, Eat, and Hotel
      - Make API calls to Google Maps APIs such as the Places API and the Distance Matrix API
      - Set parameters for the selected option
      - Save trip events and transaction details into the database
