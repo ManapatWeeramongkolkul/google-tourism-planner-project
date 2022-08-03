@@ -721,8 +721,8 @@ exports.helloWorld = (req, res) => {
       travel_unit = 'm'
     if (travel_unit === 'day' || travel_unit === 'days')
       travel_unit = 'd'
-    let includetraveltime = moment(datetime).add(travel_amount, travel_unit).format("YYYY-MM-DD HH:mm:ss") // HARD CODE
-    netleft = netleft - 150
+    let includetraveltime = moment(datetime).add(travel_amount, travel_unit).format("YYYY-MM-DD HH:mm:ss")
+    netleft = netleft - 150 // Hard coded travel cost
 
     let newdatetime = moment(includetraveltime).add(dur_amount, dur_unit).format("YYYY-MM-DD HH:mm:ss")
     let jsonResponse = {
