@@ -162,8 +162,8 @@ Use Cloud SQL as the primary database of the system. Ingest data into BigQuery.
 | Tables   |      Type      |  Mode |
 |----------|:-------------:|------:|
 |flight_id|STRING|NULLABLE|		
-|airport_depart1|STRING	NULLABLE|		
-|airport_arrive1|STRING	NULLABLE|		
+|airport_depart1|STRING|NULLABLE|		
+|airport_arrive1|STRING|NULLABLE|		
 |depart_day1|DATE|NULLABLE|		
 |depart_time1|TIME|NULLABLE|		
 |arrive_day1|DATE|NULLABLE|		
